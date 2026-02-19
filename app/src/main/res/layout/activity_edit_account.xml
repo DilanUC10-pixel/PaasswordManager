@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:id="@+id/tvEditTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_add_account"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/btnBack"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Category -->
+        <TextView
+            android:id="@+id/lblCategoryEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría (*)"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvEditTitle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/spCategoryEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:entries="@array/categories_array"
+            app:layout_constraintTop_toBottomOf="@id/lblCategoryEdit" />
+
+        <!-- Usage -->
+        <TextView
+            android:id="@+id/lblUsageEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uso (*)"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/spCategoryEdit"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rgUsageEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/lblUsageEdit">
+            <RadioButton android:id="@+id/rbAppEdit" android:layout_width="wrap_content" android:layout_height="48dp" android:text="App" />
+            <RadioButton android:id="@+id/rbWebEdit" android:layout_width="wrap_content" android:layout_height="48dp" android:text="Web" />
+            <RadioButton android:id="@+id/rbBothEdit" android:layout_width="wrap_content" android:layout_height="48dp" android:text="Ambas" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUrlEdit"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="URL (*)"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/rgUsageEdit">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUrlEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Mandatory Fields -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSiteName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Nombre del sitio (*)"
+            app:layout_constraintTop_toBottomOf="@id/tilUrlEdit">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAccountNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Email (*)"
+            app:layout_constraintTop_toBottomOf="@id/tilSiteName">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAccountEmailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contraseña (*)"
+            app:endIconMode="password_toggle"
+            app:layout_constraintTop_toBottomOf="@id/tilEmail">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAccountPasswordEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRegisterDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Fecha de registro (*)"
+            app:layout_constraintTop_toBottomOf="@id/tilPassword">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegisterDateEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:focusable="false"
+                android:clickable="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Optional Fields Header -->
+        <TextView
+            android:id="@+id/tvOptionalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Campos Opcionales"
+            android:textStyle="italic|bold"
+            app:layout_constraintTop_toBottomOf="@id/tilRegisterDate"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Optional Fields CheckBoxes -->
+        <CheckBox
+            android:id="@+id/cbHasUsernameEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de usuario"
+            app:layout_constraintTop_toBottomOf="@id/tvOptionalLabel"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbHasPhoneEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teléfono"
+            app:layout_constraintTop_toBottomOf="@id/cbHasUsernameEdit"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbHasAltEmailEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correo alterno"
+            app:layout_constraintTop_toBottomOf="@id/cbHasPhoneEdit"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbHasSecurityEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seguridad (Pregunta/Pista)"
+            app:layout_constraintTop_toBottomOf="@id/cbHasAltEmailEdit"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbHasExtraEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Extra (OAuth/Notas)"
+            app:layout_constraintTop_toBottomOf="@id/cbHasSecurityEdit"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Optional Input Fields (Initially GONE) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUsername"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Nombre de Usuario"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/cbHasExtraEdit">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsernameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Teléfono"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tilUsername">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAccountPhoneEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAltEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Correo alterno"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tilPhone">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAltEmailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSecretQuestion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Pregunta Secreta"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tilAltEmail">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSecretQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPasswordHint"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Pista de Contraseña"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tilSecretQuestion">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPasswordHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilOAuth"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Acceso Externo (OAuth)"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tilPasswordHint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etOAuth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNotes"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Notas"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tilOAuth">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnUpdateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/btn_save_account"
+            android:layout_marginTop="32dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tilNotes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

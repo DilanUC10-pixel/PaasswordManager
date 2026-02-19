@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories_array">
+        <item>Correo</item>
+        <item>Redes sociales</item>
+        <item>Bancos</item>
+        <item>Trabajo</item>
+        <item>Personal</item>
+        <item>Otro</item>
+    </string-array>
+
+</resources>

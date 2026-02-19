@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Palette -->
+    <color name="primary">#82B1FF</color> <!-- Light Blue for dark surface -->
+    <color name="primary_variant">#448AFF</color>
+    <color name="secondary">#80DEEA</color>
+    <color name="secondary_variant">#00BCD4</color>
+    <color name="accent">#00E5FF</color>
+
+    <!-- UI Colors -->
+    <color name="background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="error">#CF6679</color>
+
+    <!-- Text Colors -->
+    <color name="text_on_background">#E1E1E1</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="white">#FFFFFF</color>
+</resources>

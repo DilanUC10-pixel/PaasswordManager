@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Vibrant Blue Palette -->
+    <color name="primary">#007BFF</color> <!-- Electric Blue -->
+    <color name="primary_variant">#0056b3</color>
+    <color name="secondary">#00D2FF</color> <!-- Sky Blue -->
+    <color name="secondary_variant">#00A1C1</color>
+    <color name="accent">#00E5FF</color> <!-- Neon Blue -->
+
+    <!-- UI Colors -->
+    <color name="background">#F0F4F8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#FF1744</color>
+
+    <!-- Text Colors -->
+    <color name="text_on_background">#102A43</color>
+    <color name="text_secondary">#486581</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

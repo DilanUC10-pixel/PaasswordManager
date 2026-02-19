@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvAddTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar Cuenta"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/lblCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría (+)"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvAddTitle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/spCategory"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:entries="@array/categories_array"
+            app:layout_constraintTop_toBottomOf="@id/lblCategory" />
+
+        <TextView
+            android:id="@+id/lblUsage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uso (+)"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/spCategory"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rgUsage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/lblUsage">
+            <RadioButton android:id="@+id/rbApp" android:layout_width="wrap_content" android:layout_height="48dp" android:text="App" />
+            <RadioButton android:id="@+id/rbWeb" android:layout_width="wrap_content" android:layout_height="48dp" android:text="Web" />
+            <RadioButton android:id="@+id/rbBoth" android:layout_width="wrap_content" android:layout_height="48dp" android:text="Ambas" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="URL (Obligatorio si Web/Ambas)"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/rgUsage" />
+
+        <EditText
+            android:id="@+id/etAccountName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Nombre de la cuenta (+)"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/etUrl" />
+
+        <EditText
+            android:id="@+id/etAccountEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Email (+)"
+            android:inputType="textEmailAddress"
+            app:layout_constraintTop_toBottomOf="@id/etAccountName" />
+
+        <CheckBox
+            android:id="@+id/cbHasUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="¿Tiene nombre de usuario?"
+            app:layout_constraintTop_toBottomOf="@id/etAccountEmail"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Nombre de usuario"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/cbHasUsername" />
+
+        <EditText
+            android:id="@+id/etAccountPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Contraseña (+)"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/etUsername" />
+
+        <EditText
+            android:id="@+id/etConfirmAccountPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Confirmar Contraseña (+)"
+            android:inputType="textPassword"
+            app:layout_constraintTop_toBottomOf="@id/etAccountPassword" />
+
+        <CheckBox
+            android:id="@+id/cbHasPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="¿Agregar teléfono?"
+            app:layout_constraintTop_toBottomOf="@id/etConfirmAccountPassword"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/etAccountPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/cbHasPhone" />
+
+        <CheckBox
+            android:id="@+id/cbHasAltEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="¿Agregar correo alterno?"
+            app:layout_constraintTop_toBottomOf="@id/etAccountPhone"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/etAltEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Correo alterno"
+            android:inputType="textEmailAddress"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/cbHasAltEmail" />
+
+        <EditText
+            android:id="@+id/etRegisterDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Fecha de registro (+)"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/etAltEmail" />
+
+        <Button
+            android:id="@+id/btnSaveAccount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Guardar Cuenta"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/etRegisterDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

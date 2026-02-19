@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Password Manager Pro</string>
+    <string name="root_registration_title">Configuración de Cuenta Maestra</string>
+    <string name="hint_email">Correo Electrónico</string>
+    <string name="hint_phone">Teléfono de Recuperación</string>
+    <string name="hint_password">Contraseña Maestra</string>
+    <string name="hint_confirm_password">Confirmar Contraseña</string>
+    <string name="btn_save">Registrar Ahora</string>
+    <string name="btn_login">Iniciar Sesión</string>
+    <string name="login_title">Bienvenido de nuevo</string>
+    <string name="welcome_title">Password Manager</string>
+    <string name="welcome_subtitle">Tus contraseñas seguras y a mano</string>
+    <string name="btn_get_started">Comenzar</string>
+    <string name="biometric_setup_title">Seguridad de Acceso</string>
+    <string name="biometric_setup_message">Configura cómo quieres proteger tu información sensible usando los métodos de seguridad de tu teléfono.</string>
+    <string name="btn_use_phone_unlock">Sí, usar métodos de desbloqueo del teléfono</string>
+    <string name="btn_only_pass">No, solo usar contraseña de la app</string>
+    <string name="biometric_prompt_title">Autenticación requerida</string>
+    <string name="biometric_prompt_subtitle">Inicia sesión para continuar</string>
+
+    <string name="error_passwords_dont_match">Las contraseñas no coinciden</string>
+    <string name="error_empty_fields">Este campo es obligatorio</string>
+    <string name="error_invalid_email">Formato de correo no válido</string>
+    <string name="error_invalid_credentials">Correo o contraseña incorrectos</string>
+    <string name="registration_success">Usuario registrado. Por favor, inicie sesión.</string>
+
+    <string name="menu_title">Menu</string>
+    <string name="btn_view_records">Mis Contraseñas</string>
+    <string name="btn_manage_accounts">Nueva Cuenta</string>
+    <string name="btn_settings">Configuración</string>
+
+    <string name="title_manage_accounts">Administrar Cuentas</string>
+    <string name="title_add_account">Crear Cuenta</string>
+    <string name="title_edit_account">Editar Cuenta</string>
+    <string name="btn_save_account">Guardar Cuenta</string>
+    <string name="btn_update_account">Actualizar Cuenta</string>
+    <string name="hint_account_name">Nombre de la cuenta (ej. Netflix)</string>
+    <string name="hint_url">URL del sitio</string>
+    <string name="label_category">Categoría</string>
+    <string name="label_usage">Uso de la cuenta</string>
+    <string name="cb_has_username">Usar nombre de usuario</string>
+    <string name="cb_has_phone">Incluir teléfono</string>
+    <string name="cb_has_alt_email">Correo alternativo</string>
+    <string name="hint_register_date">Fecha de registro</string>
+    <string name="account_saved_success">Cuenta guardada exitosamente</string>
+
+    <string name="title_config">Configuración</string>
+    <string name="label_dark_mode">Modo Oscuro</string>
+    <string name="label_biometrics">Habilitar desbloqueo por método de teléfono</string>
+    <string name="label_about">Acerca de la aplicación</string>
+    <string name="label_export">Exportar mis datos</string>
+    <string name="label_import">Importar datos</string>
+    <string name="label_logout">Cerrar Sesión</string>
+    <string name="btn_back">Volver</string>
+    <string name="prompt_password_title">Ingrese Contraseña Maestra</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="btn_cancel">Cancelar</string>
+</resources>
