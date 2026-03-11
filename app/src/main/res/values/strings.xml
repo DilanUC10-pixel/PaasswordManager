@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Password Manager Pro</string>
+    <string name="app_name">Password Manager - Jesús Barrón Vidales</string>
     <string name="root_registration_title">Configuración de Cuenta Maestra</string>
     <string name="hint_email">Correo Electrónico</string>
     <string name="hint_phone">Teléfono de Recuperación</string>

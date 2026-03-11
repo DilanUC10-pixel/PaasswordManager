@@ -9,30 +9,24 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.paasswordmanager.R;
+import com.example.paasswordmanager.managers.LoginSingleton;
 import com.example.paasswordmanager.models.Account;
-import com.example.paasswordmanager.presenters.ViewRecordsContract;
-import com.example.paasswordmanager.presenters.ViewRecordsPresenter;
+import com.example.paasswordmanager.viewmodels.AccountViewModel;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ViewRecordsActivity extends AppCompatActivity implements ViewRecordsContract.View, AccountAdapter.OnAccountActionListener {
+public class ViewRecordsActivity extends AppCompatActivity implements AccountAdapter.OnAccountActionListener {
 
     private RecyclerView rvAccounts;
     private AccountAdapter adapter;
     private ImageButton btnBack;
     private TextView tvWelcomeUser;
-    private ViewRecordsContract.Presenter presenter;
-
-    private final ActivityResultLauncher<Intent> editAccountLauncher = registerForActivityResult(
-        new ActivityResultContracts.StartActivityForResult(),
-        result -> {
-            if (result.getResultCode() == RESULT_OK) {
-                presenter.loadUserData();
-            }
-        }
-    );
+    private AccountViewModel accountViewModel;
+    private String currentUserRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,58 +38,38 @@ public class ViewRecordsActivity extends AppCompatActivity implements ViewRecord
         rvAccounts = findViewById(R.id.rvAccounts);
         rvAccounts.setLayoutManager(new LinearLayoutManager(this));
 
-        presenter = new ViewRecordsPresenter(this, this);
+        // Inicializar ViewModel
+        accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+
+        currentUserRole = LoginSingleton.getInstance().getCurrentUser().getRole();
+        tvWelcomeUser.setText("Bienvenido, " + LoginSingleton.getInstance().getCurrentUser().getName());
+        tvWelcomeUser.setTextColor("Root".equals(currentUserRole) ? Color.RED : Color.GREEN);
+
+        // Observar cambios en la base de datos (MVVM)
+        accountViewModel.getAllAccounts().observe(this, accounts -> {
+            adapter = new AccountAdapter(accounts, currentUserRole, this);
+            rvAccounts.setAdapter(adapter);
+        });
 
         btnBack.setOnClickListener(v -> finish());
-        
-        presenter.loadUserData();
-    }
-
-    @Override
-    public void showWelcomeMessage(String name, String role) {
-        tvWelcomeUser.setText("Bienvenido, " + name);
-        if ("Root".equals(role)) {
-            tvWelcomeUser.setTextColor(Color.RED);
-        } else {
-            tvWelcomeUser.setTextColor(Color.GREEN);
-        }
-    }
-
-    @Override
-    public void displayAccounts(List<Account> accounts, String role) {
-        adapter = new AccountAdapter(accounts, role, this);
-        rvAccounts.setAdapter(adapter);
-    }
-
-    @Override
-    public void showDeleteConfirmation(int position) {
-        new AlertDialog.Builder(this)
-            .setTitle("Eliminar Cuenta")
-            .setMessage("¿Estás seguro de que deseas eliminar esta cuenta?")
-            .setPositiveButton("Eliminar", (dialog, which) -> presenter.confirmDeleteAccount(position))
-            .setNegativeButton("Cancelar", null)
-            .show();
-    }
-
-    @Override
-    public void navigateToEditAccount(int position) {
-        Intent intent = new Intent(this, EditAccountActivity.class);
-        intent.putExtra("ACCOUNT_INDEX", position);
-        editAccountLauncher.launch(intent);
-    }
-
-    @Override
-    public void updateList() {
-        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onEdit(int position) {
-        presenter.onEditAccountClicked(position);
+        Account account = adapter.getAccountAt(position);
+        Intent intent = new Intent(this, EditAccountActivity.class);
+        intent.putExtra("ACCOUNT_ID", account.getId()); // Usamos el ID de Room
+        startActivity(intent);
     }
 
     @Override
     public void onDelete(int position) {
-        presenter.onDeleteAccountClicked(position);
+        Account account = adapter.getAccountAt(position);
+        new AlertDialog.Builder(this)
+            .setTitle("Confirmar eliminación")
+            .setMessage("¿Estás seguro de borrar la cuenta " + account.getSiteName() + "?")
+            .setPositiveButton("Eliminar", (dialog, which) -> accountViewModel.delete(account))
+            .setNegativeButton("Cancelar", null)
+            .show();
     }
 }

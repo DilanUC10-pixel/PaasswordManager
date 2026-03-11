@@ -35,7 +35,7 @@ public class EditAccountActivity extends AppCompatActivity implements AccountMan
     private Button btnUpdateAccount;
     private ImageButton btnBack;
     private TextView tvEditTitle;
-    private int accountIndex = -1;
+    private int accountId = -1;
     private AccountManagementContract.Presenter presenter;
 
     @Override
@@ -100,15 +100,14 @@ public class EditAccountActivity extends AppCompatActivity implements AccountMan
         setupVisibilityListeners();
         setupTextWatchers();
 
-        if (getIntent().hasExtra("ACCOUNT_INDEX")) {
-            accountIndex = getIntent().getIntExtra("ACCOUNT_INDEX", -1);
-            presenter.loadAccount(accountIndex);
+        if (getIntent().hasExtra("ACCOUNT_ID")) {
+            accountId = getIntent().getIntExtra("ACCOUNT_ID", -1);
+            presenter.loadAccountById(accountId);
             tvEditTitle.setText(R.string.title_edit_account);
             btnUpdateAccount.setText(R.string.btn_update_account);
         } else {
             tvEditTitle.setText(R.string.title_add_account);
             btnUpdateAccount.setText(R.string.btn_save_account);
-            // Set current date for new account
             etRegisterDate.setText(getCurrentDate());
         }
 
@@ -120,7 +119,7 @@ public class EditAccountActivity extends AppCompatActivity implements AccountMan
             else if (usageId == R.id.rbBothEdit) usage = "Ambas";
 
             presenter.saveAccount(
-                accountIndex,
+                accountId,
                 spCategory.getSelectedItem().toString(),
                 usage,
                 etAccountName.getText().toString().trim(),
@@ -220,7 +219,6 @@ public class EditAccountActivity extends AppCompatActivity implements AccountMan
             etNotes.setText(account.getNotes());
         }
         
-        // Handle usage radio buttons
         if ("Web".equals(account.getUsage())) {
             ((RadioButton)findViewById(R.id.rbWebEdit)).setChecked(true);
             tilUrl.setVisibility(View.VISIBLE);

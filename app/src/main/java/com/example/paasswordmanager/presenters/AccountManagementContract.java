@@ -12,8 +12,8 @@ public interface AccountManagementContract {
     }
 
     interface Presenter {
-        void loadAccount(int index);
-        void saveAccount(int index, String category, String usage, String siteName, String email, String password, String date,
+        void loadAccountById(int id);
+        void saveAccount(int id, String category, String usage, String siteName, String email, String password, String date,
                          String username, String phone, String secretQuestion, String passwordHint, String altEmail, String oauth, String notes);
     }
 }

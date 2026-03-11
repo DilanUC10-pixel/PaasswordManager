@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/text_on_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnEditItem" />
@@ -31,9 +30,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/text_secondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAccountNameItem"
+            app:layout_constraintEnd_toStartOf="@id/btnEditItem" />
+
+        <TextView
+            android:id="@+id/tvAccountDetailItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAccountEmailItem"
             app:layout_constraintEnd_toStartOf="@id/btnEditItem" />
 
         <TextView
@@ -47,7 +55,7 @@
             android:textSize="12sp"
             android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAccountEmailItem" />
+            app:layout_constraintTop_toBottomOf="@id/tvAccountDetailItem" />
 
         <ImageButton
             android:id="@+id/btnEditItem"

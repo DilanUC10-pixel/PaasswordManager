@@ -1,6 +1,14 @@
 package com.example.paasswordmanager.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import com.example.paasswordmanager.managers.SecurityHelper;
+
+@Entity(tableName = "accounts")
 public class Account {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
     // Mandatory fields
     private String siteName;
     private String email;
@@ -24,6 +32,40 @@ public class Account {
         this.email = email;
         this.password = password;
         this.registerDate = registerDate;
+    }
+
+    // ID Getter and Setter
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    // Security methods within the model
+    public void secure(String masterKey) {
+        this.password = encryptField(this.password, masterKey);
+        this.secretQuestion = encryptField(this.secretQuestion, masterKey);
+        this.passwordHint = encryptField(this.passwordHint, masterKey);
+        this.notes = encryptField(this.notes, masterKey);
+    }
+
+    public void unsecure(String masterKey) {
+        this.password = decryptField(this.password, masterKey);
+        this.secretQuestion = decryptField(this.secretQuestion, masterKey);
+        this.passwordHint = decryptField(this.passwordHint, masterKey);
+        this.notes = decryptField(this.notes, masterKey);
+    }
+
+    private String encryptField(String value, String key) {
+        if (value != null && !value.isEmpty()) {
+            return SecurityHelper.encrypt(value, key);
+        }
+        return value;
+    }
+
+    private String decryptField(String value, String key) {
+        if (value != null && !value.isEmpty()) {
+            String decrypted = SecurityHelper.decrypt(value, key);
+            return decrypted != null ? decrypted : value;
+        }
+        return value;
     }
 
     // Getters and Setters
@@ -56,6 +98,11 @@ public class Account {
     public String getUrl() { return url; }
     public void setUrl(String url) { this.url = url; }
 
-    // Backward compatibility or convenience getters
     public String getName() { return siteName; }
+
+    // Convenience decryption methods
+    public String getDecryptedPassword(String masterKey) { return decryptField(password, masterKey); }
+    public String getDecryptedSecretQuestion(String masterKey) { return decryptField(secretQuestion, masterKey); }
+    public String getDecryptedPasswordHint(String masterKey) { return decryptField(passwordHint, masterKey); }
+    public String getDecryptedNotes(String masterKey) { return decryptField(notes, masterKey); }
 }

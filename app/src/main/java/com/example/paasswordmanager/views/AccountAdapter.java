@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.paasswordmanager.R;
-import com.example.paasswordmanager.managers.LoginSingleton;
 import com.example.paasswordmanager.models.Account;
 import java.util.List;
 
@@ -29,6 +28,10 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         this.listener = listener;
     }
 
+    public Account getAccountAt(int position) {
+        return accountList.get(position);
+    }
+
     @NonNull
     @Override
     public AccountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,11 +44,9 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         Account account = accountList.get(position);
         boolean isRoot = "Root".equals(userRole);
 
-        // Site name is mandatory for both
         holder.tvName.setText(account.getSiteName());
 
         if (isRoot) {
-            // Root sees everything except password and secret question (site name, email, date, etc)
             holder.tvEmail.setText("Email: " + account.getEmail());
             holder.tvDetail.setText("Fecha: " + account.getRegisterDate());
             holder.tvCategory.setText(account.getCategory());
@@ -53,7 +54,6 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             holder.btnEdit.setVisibility(View.VISIBLE);
             holder.btnDelete.setVisibility(View.VISIBLE);
         } else {
-            // Limited sees only site name and access type
             String accessType = "Email";
             if (account.getExternalAccess() != null && !account.getExternalAccess().isEmpty()) accessType = "Externo (OAuth)";
             else if (account.getUsername() != null && !account.getUsername().isEmpty()) accessType = "Usuario";
@@ -71,7 +71,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
 
     @Override
     public int getItemCount() {
-        return accountList.size();
+        return accountList != null ? accountList.size() : 0;
     }
 
     static class AccountViewHolder extends RecyclerView.ViewHolder {
@@ -83,7 +83,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             tvName = itemView.findViewById(R.id.tvAccountNameItem);
             tvEmail = itemView.findViewById(R.id.tvAccountEmailItem);
             tvCategory = itemView.findViewById(R.id.tvAccountCategoryItem);
-            tvDetail = new TextView(itemView.getContext()); // Dynamically adding for simplicity if not in layout
+            tvDetail = itemView.findViewById(R.id.tvAccountDetailItem); // Fixed ID if it exists, or just use tvDetail
+            if (tvDetail == null) tvDetail = tvCategory; // Fallback
             btnEdit = itemView.findViewById(R.id.btnEditItem);
             btnDelete = itemView.findViewById(R.id.btnDeleteItem);
         }
